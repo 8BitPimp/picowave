@@ -3,6 +3,20 @@
 
 namespace PicoWave {
 
+enum {
+    PW_OK,
+    PW_ALREADY_OPEN,
+    PW_WAVEINFO_ERROR,
+    PW_THREAD_ABORT,
+    PW_WAVEOUTOPEN_ERROR,
+    PW_CREATETHREAD_ERROR,
+    PW_CREATEEVENT_ERROR,
+    PW_WAVEOUTCLOSE_ERROR,
+    PW_WAVEOUTWRITE_ERROR,
+    PW_WAVEOUTPREPHDR_ERROR,
+    PW_CLOSEHANDLE_ERROR,
+};
+
 typedef void (*WaveProc)(
     void* buffer,           // audio buffer data pointer
     size_t bufferSize,      // audio buffer size in bytes
@@ -30,6 +44,8 @@ struct WaveOut {
     bool pause();
 
     bool close();
+
+    uint32_t lastError() const;
 
 protected:
     struct Detail* _detail;
